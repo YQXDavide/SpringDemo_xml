@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:aop="http://www.springframework.org/schema/aop"
         xsi:schemaLocation="http://www.springframework.org/schema/beans
-                http://www.springframework.org/schema/beans/spring-beans.xsd">
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd"
+                >
 
 <bean id="customerService" class="com.yang.service.impl.CustomerServiceImpl" init-method="init">
 	<property name="customerDao" ref="customerDao"></property>
 </bean>
-
+<bean id="logAdvice" class="com.yang.advice.Logger"></bean>
 <!--  <bean id="staticFactory" class="com.yang.factory.StaticFactory" factory-method="getCustomerDao"></bean>-->
 <bean id="customerDao" class="com.yang.dao.impl.CustomerDaoImpl"></bean>
+<aop:config>	
+	<aop:aspect id="logAspect" ref="logAdvice">
+		<aop:pointcut expression="execution(* com.yang.service.impl.CustomerServiceImpl.saveCustomer(..))" id="pointcut1"/>
+		<aop:before method="printLog" pointcut-ref="pointcut1"/>
+	</aop:aspect>
+</aop:config>
 </beans>        
