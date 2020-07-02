@@ -9,7 +9,10 @@ import com.yang.service.CustomerService;
 public class CustomerServiceImpl implements CustomerService {
 	private CustomerDao customerDao;
 	public CustomerServiceImpl() {}
-		
+	
+	public void init() {
+		System.out.println("进行初始化操作！");
+	}
 	public void setCustomerDao(CustomerDao customerDao) {
 		this.customerDao = customerDao;
 	}
@@ -43,5 +46,5 @@ public class CustomerServiceImpl implements CustomerService {
 		System.out.println("业务层调用数据层查询所有客户信息");
 		return customerDao.selectAll();
 	}
-
+	
 }
