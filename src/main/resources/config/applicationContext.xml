@@ -3,8 +3,11 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans.xsd">
+
 <bean id="customerService" class="com.yang.service.impl.CustomerServiceImpl" init-method="init">
 	<property name="customerDao" ref="customerDao"></property>
 </bean>
+
+<!--  <bean id="staticFactory" class="com.yang.factory.StaticFactory" factory-method="getCustomerDao"></bean>-->
 <bean id="customerDao" class="com.yang.dao.impl.CustomerDaoImpl"></bean>
 </beans>        
